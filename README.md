@@ -29,7 +29,7 @@ npm install
 2. Create a `.env` file in the project root:
 
 ```bash
-VITE_MOCKAPI_URL=https://69f8d10af7044aa0103e8708.mockapi.io/post/:endpoint
+VITE_MOCKAPI_URL=https://69f8d3cdf7044aa0103e8990.mockapi.io/post/:endpoint
 ```
 
 3. Make sure your MockAPI project contains a resource named `employees` with
@@ -79,4 +79,5 @@ Example payload:
 
 - Add screenshots of the working CRUD flow.
 - Include the MockAPI project link in your submission sheet.
+- MockAPI link: `https://69f8d3cdf7044aa0103e8990.mockapi.io/post/:endpoint`
 - Push the project to GitHub after verifying `npm run dev`.
