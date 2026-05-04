@@ -81,3 +81,15 @@ Example payload:
 - Include the MockAPI project link in your submission sheet.
 - MockAPI link: `https://69f8d3cdf7044aa0103e8990.mockapi.io/post/:endpoint`
 - Push the project to GitHub after verifying `npm run dev`.
+
+## GitHub Pages Deployment
+
+1. Push the `main` branch to GitHub.
+2. Open the repo on GitHub and go to `Settings > Pages`.
+3. Set the source to `GitHub Actions`.
+4. Wait for the workflow to finish.
+5. Your deployed link will be:
+
+```bash
+https://ruthvik072006.github.io/assignment-2/
+```
