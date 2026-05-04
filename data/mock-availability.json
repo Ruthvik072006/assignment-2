@@ -1,0 +1,11 @@
+[
+  {
+    "id": "sample-1",
+    "movie": "Example Movie",
+    "city": "Hyderabad",
+    "theatre": "AMB Cinemas",
+    "bookingOpen": false,
+    "bookingUrl": "https://in.bookmyshow.com",
+    "lastCheckedAt": null
+  }
+]

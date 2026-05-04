@@ -1,0 +1,80 @@
+:root {
+  --bg-start: #081221;
+  --bg-end: #102b48;
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-border: rgba(255, 255, 255, 0.12);
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(74, 144, 226, 0.24), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 140, 105, 0.22), transparent 22%),
+    linear-gradient(160deg, var(--bg-start) 0%, #0d1e33 45%, var(--bg-end) 100%);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero-card,
+.panel-card,
+.app-card {
+  backdrop-filter: blur(14px);
+}
+
+.hero-card {
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(135deg, rgba(10, 20, 38, 0.92), rgba(18, 46, 77, 0.84));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+.panel-card,
+.app-card {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.badge-soft {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.table > :not(caption) > * > * {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.table thead th {
+  color: #4a5568;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom-color: rgba(15, 23, 42, 0.12);
+}
+
+.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
+}
+
+@media (max-width: 991.98px) {
+  .hero .display-5 {
+    font-size: 2.2rem;
+  }
+}

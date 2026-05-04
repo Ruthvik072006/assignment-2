@@ -1,0 +1,384 @@
+:root {
+  --bg: #f4efe7;
+  --paper: rgba(255, 250, 244, 0.86);
+  --ink: #191613;
+  --muted: #6a625b;
+  --accent: #2457ff;
+  --accent-2: #ff7a45;
+  --success: #16784f;
+  --warning: #b66a00;
+  --danger: #b42318;
+  --line: rgba(25, 22, 19, 0.12);
+  --shadow: 0 24px 80px rgba(42, 31, 18, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(36, 87, 255, 0.14), transparent 26%),
+    radial-gradient(circle at top right, rgba(255, 122, 69, 0.18), transparent 28%),
+    linear-gradient(135deg, #f5efe6 0%, #efe6da 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(1220px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0 56px;
+}
+
+.hero,
+.card {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--paper);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.45fr 0.85fr;
+  gap: 24px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.hero-copy h1,
+h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  line-height: 0.92;
+}
+
+.hero-copy h1 {
+  font-size: clamp(3rem, 8vw, 5.8rem);
+  max-width: 11ch;
+  margin-top: 10px;
+}
+
+.eyebrow,
+.panel-label,
+.muted-pill {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.hero-text,
+.section-copy,
+.form-message,
+.metric-detail,
+.course-code,
+.course-insights,
+label,
+input,
+textarea,
+select,
+button,
+li {
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+.hero-text {
+  max-width: 60ch;
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.hero-panel {
+  padding: 28px;
+  border-radius: 24px;
+  color: #f9f4ef;
+  background: linear-gradient(180deg, rgba(25, 22, 19, 0.96), rgba(54, 40, 28, 0.92));
+}
+
+.hero-panel ul {
+  margin: 16px 0 0;
+  padding-left: 18px;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.metric-card {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(25, 22, 19, 0.08);
+}
+
+.metric-label {
+  margin: 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.metric-value {
+  margin: 8px 0 0;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.metric-detail {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  padding: 28px;
+}
+
+.card-wide {
+  grid-column: span 2;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.section-copy {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.grid-form,
+.stack-form {
+  display: grid;
+  gap: 14px;
+}
+
+.grid-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stack-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.full-span {
+  grid-column: span 2;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--muted);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid rgba(25, 22, 19, 0.16);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(36, 87, 255, 0.18);
+  border-color: rgba(36, 87, 255, 0.45);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.primary-button,
+.ghost-button {
+  border-radius: 999px;
+  padding: 14px 18px;
+  justify-self: start;
+}
+
+.primary-button {
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #6b6eff);
+}
+
+.ghost-button {
+  color: var(--ink);
+  border: 1px solid rgba(25, 22, 19, 0.14);
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.muted-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.form-message {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  color: var(--accent-2);
+}
+
+.result-box {
+  margin-top: 14px;
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(25, 22, 19, 0.08);
+  min-height: 88px;
+}
+
+.summary-grid,
+.courses-list {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.summary-card,
+.course-card {
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(25, 22, 19, 0.08);
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 2rem;
+}
+
+.summary-card span {
+  color: var(--muted);
+}
+
+.course-head,
+.course-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.course-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.course-name {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.course-code,
+.course-insights {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.status-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.status-good {
+  color: white;
+  background: var(--success);
+}
+
+.status-warning {
+  color: #5f3e00;
+  background: #ffe5b5;
+}
+
+.status-danger {
+  color: white;
+  background: var(--danger);
+}
+
+.course-insights {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(25, 22, 19, 0.08);
+}
+
+.insight-line {
+  margin: 6px 0 0;
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .layout,
+  .summary-grid,
+  .grid-form,
+  .stack-form,
+  .course-form {
+    grid-template-columns: 1fr;
+  }
+
+  .card-wide,
+  .full-span {
+    grid-column: auto;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .page-shell {
+    width: min(100% - 22px, 960px);
+    padding-top: 20px;
+  }
+
+  .hero,
+  .card {
+    padding: 20px;
+    border-radius: 24px;
+  }
+}

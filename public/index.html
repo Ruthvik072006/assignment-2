@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ERP Attendance Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">ERP Attendance Analyzer</p>
+          <h1>See your attendance, future risk, and the exact classes you need to attend.</h1>
+          <p class="hero-text">
+            Paste your ERP data, add your subjects, and the app will calculate how many classes
+            you must attend to stay above 75% or 80% with your own semester conditions.
+          </p>
+          <div class="hero-metrics" id="heroMetrics"></div>
+        </div>
+        <div class="hero-panel">
+          <p class="panel-label">What you get</p>
+          <ul>
+            <li>Overall attendance across all subjects</li>
+            <li>Per-subject recovery numbers for 75% and 80%</li>
+            <li>Safe bunk estimates when you know classes left</li>
+            <li>Local storage in this project folder only</li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="card card-wide">
+          <div class="section-head">
+            <div>
+              <h2>Profile</h2>
+              <p class="section-copy">Keep your dashboard name and semester label in sync with your ERP.</p>
+            </div>
+            <button id="resetBtn" class="ghost-button" type="button">Reset sample data</button>
+          </div>
+          <form id="profileForm" class="grid-form">
+            <label>
+              Dashboard name
+              <input id="studentNameInput" name="studentName" placeholder="B.Tech CSE 3rd Year" />
+            </label>
+            <label>
+              Semester label
+              <input id="semesterLabelInput" name="semesterLabel" placeholder="Mid-semester tracker" />
+            </label>
+            <button class="primary-button" type="submit">Save profile</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h2>Import ERP data</h2>
+              <p class="section-copy">Paste JSON or CSV from your ERP export. Existing data can be replaced or appended.</p>
+            </div>
+          </div>
+          <form id="importForm" class="stack-form">
+            <label>
+              Import mode
+              <select id="importMode" name="mode">
+                <option value="replace">Replace all subjects</option>
+                <option value="append">Append to existing subjects</option>
+              </select>
+            </label>
+            <label class="full-span">
+              Paste JSON or CSV
+              <textarea
+                id="importText"
+                name="text"
+                rows="10"
+                placeholder="CSV example:
+name,code,attended,conducted,remainingExpected,notes
+Data Structures,CSE201,32,40,12,Lab heavy
+Operating Systems,CSE202,28,36,10
+
+JSON example:
+[{&quot;name&quot;:&quot;Maths&quot;,&quot;attended&quot;:18,&quot;conducted&quot;:24,&quot;remainingExpected&quot;:8}]"
+              ></textarea>
+            </label>
+            <button class="primary-button" type="submit">Import data</button>
+          </form>
+          <p id="importMessage" class="form-message"></p>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h2>Add subject</h2>
+              <p class="section-copy">Enter one subject manually if your ERP export is incomplete.</p>
+            </div>
+          </div>
+          <form id="courseForm" class="stack-form">
+            <label>
+              Subject name
+              <input name="name" placeholder="Operating Systems" required />
+            </label>
+            <label>
+              Subject code
+              <input name="code" placeholder="CSE202" />
+            </label>
+            <label>
+              Attended classes
+              <input name="attended" type="number" min="0" step="1" required />
+            </label>
+            <label>
+              Conducted classes
+              <input name="conducted" type="number" min="1" step="1" required />
+            </label>
+            <label>
+              Expected classes left
+              <input name="remainingExpected" type="number" min="0" step="1" value="0" />
+            </label>
+            <label class="full-span">
+              Notes
+              <textarea name="notes" rows="3" placeholder="Optional context like lab, internals, or attendance policy."></textarea>
+            </label>
+            <button class="primary-button" type="submit">Add subject</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <h2>Attendance calculator</h2>
+              <p class="section-copy">Pick any subject or use the overall total to check your recovery path.</p>
+            </div>
+          </div>
+          <form id="calculatorForm" class="stack-form">
+            <label>
+              Scope
+              <select id="scopeSelect" name="scope">
+                <option value="overall">Overall</option>
+              </select>
+            </label>
+            <label>
+              Target
+              <select id="targetSelect" name="target">
+                <option value="75">75%</option>
+                <option value="80">80%</option>
+              </select>
+            </label>
+            <label>
+              Expected classes left
+              <input id="calculatorRemaining" name="remainingExpected" type="number" min="0" step="1" value="0" />
+            </label>
+          </form>
+          <div id="calculatorResult" class="result-box"></div>
+        </section>
+
+        <section class="card card-wide">
+          <div class="section-head">
+            <div>
+              <h2>Dashboard</h2>
+              <p id="dashboardMeta" class="section-copy">Loading your ERP summary.</p>
+            </div>
+            <span id="statusPill" class="muted-pill">Local mode</span>
+          </div>
+          <div id="summaryGrid" class="summary-grid"></div>
+        </section>
+
+        <section class="card card-wide">
+          <div class="section-head">
+            <div>
+              <h2>Subjects</h2>
+              <p class="section-copy">Edit the live data here. Each card recalculates the thresholds instantly.</p>
+            </div>
+          </div>
+          <div id="coursesList" class="courses-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="metricTemplate">
+      <article class="metric-card">
+        <p class="metric-label"></p>
+        <p class="metric-value"></p>
+        <p class="metric-detail"></p>
+      </article>
+    </template>
+
+    <template id="courseTemplate">
+      <article class="course-card">
+        <div class="course-head">
+          <div>
+            <p class="course-name"></p>
+            <p class="course-code"></p>
+          </div>
+          <span class="status-badge"></span>
+        </div>
+        <form class="course-form">
+          <label>
+            Subject name
+            <input name="name" required />
+          </label>
+          <label>
+            Subject code
+            <input name="code" />
+          </label>
+          <label>
+            Attended
+            <input name="attended" type="number" min="0" step="1" required />
+          </label>
+          <label>
+            Conducted
+            <input name="conducted" type="number" min="1" step="1" required />
+          </label>
+          <label>
+            Expected left
+            <input name="remainingExpected" type="number" min="0" step="1" />
+          </label>
+          <label class="full-span">
+            Notes
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+          <div class="course-actions full-span">
+            <button class="primary-button" type="submit">Save</button>
+            <button class="ghost-button" type="button" data-action="delete">Delete</button>
+          </div>
+        </form>
+        <div class="course-insights"></div>
+      </article>
+    </template>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
